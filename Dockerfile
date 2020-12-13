@@ -4,11 +4,10 @@ ARG WORK_DIR=/home/node/om
 WORKDIR ${WORK_DIR}
 
 COPY package.json ${WORK_DIR}
-COPY shared/ ${WORK_DIR}/shared
-COPY server/ ${WORK_DIR}/server
+COPY ./ ${WORK_DIR}
 
-RUN yarn run installServer
-RUN yarn run buildDeployServer
+RUN yarn install
+RUN yarn run tsc
 
 
 FROM node
@@ -17,10 +16,8 @@ ARG WORK_DIR=/home/node/om
 WORKDIR ${WORK_DIR}
 
 COPY --from=builder ${WORK_DIR}/package.json ${WORK_DIR}/package.json
-COPY --from=builder ${WORK_DIR}/shared/package.json ${WORK_DIR}/shared/package.json
-COPY --from=builder ${WORK_DIR}/server/package.json ${WORK_DIR}/server/package.json
-COPY --from=builder ${WORK_DIR}/server/deploy ${WORK_DIR}/server/deploy
+COPY --from=builder ${WORK_DIR}/deploy ${WORK_DIR}/deploy
 
-RUN yarn run installServerProd
+RUN yarn install
 
 ENTRYPOINT [ "yarn", "run", "startServer" ]
