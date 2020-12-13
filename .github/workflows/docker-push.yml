@@ -29,5 +29,5 @@ jobs:
       with:
         push: true
         tags: |
-            ordermanager/server::${{ steps.package-version.outputs.current-version }}
-            ordermanager/server::latest
+            ordermanager/server:${{ steps.package-version.outputs.current-version }}
+            ordermanager/server:latest
