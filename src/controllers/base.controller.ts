@@ -75,7 +75,7 @@ export abstract class BaseController {
     await collection.dropIndexes();
     if (this.INDEX !== null && this.INDEX.length > 0) {
       await collection.createIndex(this.INDEX, {
-        name: this.INDEX + '_index',
+        name: this.COLLECTION_NAME + '_index',
         partialFilterExpression: { disabled: false },
         unique: true,
       });

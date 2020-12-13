@@ -7,8 +7,8 @@
   "private": false,
   "scripts": {
     "tsc": "tsc",
-    "tsn": "ts-node-dev",
-    "start": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/server.ts",
+    "tsn": "ts-node-dev ./src/server.ts",
+    "start": "set debug=* && ts-node-dev ./src/server.ts",
     "prod": "tsc && node ./deploy/server.js",
     "startServer": "node ./deploy/server.js"
   },
@@ -24,9 +24,9 @@
     "helmet": "^3.21.2",
     "http-errors": "^1.7.3",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^3.4.1",
+    "mongodb": "3.4.1",
     "morgan": "^1.9.1",
-    "ts-node-dev": "^1.0.0-pre.44",
+    "ts-node-dev": "^1.1.1",
     "tslint": "^5.20.1",
     "uuid": "^3.3.3"
   },
