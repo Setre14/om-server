@@ -43,9 +43,18 @@ export abstract class BaseController {
   async get<T>(filter: any): Promise<T[]> {
     filter.disabled = false;
     console.log(this.COLLECTION_NAME + ': Get ', filter);
-    const collection = await this.getCollection();
 
-    return collection.find(filter, { projection: this.PROJECTION }).toArray();
+    let result
+    try {
+      const collection = await this.getCollection();
+      result = collection.find(filter, { projection: this.PROJECTION }).toArray();
+    } catch (err) {
+      console.log("Error occured in mongodb, return empty array");
+      console.log(err);
+      result = [];
+    }
+
+    return result
   }
 
   async insert(obj: Object) {
