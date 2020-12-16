@@ -1,4 +1,4 @@
-name: Check for vulnerable dependencies using Snyk
+name: Snyk check
 
 on: push
 
