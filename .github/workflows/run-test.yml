@@ -1,9 +1,9 @@
-name: Snyk check
+name: Run tests
 
 on: push
 
 jobs:
-  security:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -11,7 +11,4 @@ jobs:
         with:
           node-version: '12.x'
       - run: npm install
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/node@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN}}
+      - run: npm run mocha
