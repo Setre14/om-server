@@ -6,6 +6,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "mocha": "mocha",
     "tsc": "tsc",
     "tsn": "ts-node-dev ./src/server.ts",
     "start": "set debug=* && ts-node-dev ./src/server.ts",
@@ -40,6 +41,7 @@
     "@types/mongodb": "^3.3.14",
     "@types/node": "^13.1.1",
     "@types/uuid": "^3.4.6",
+    "mocha": "^8.2.1",
     "ts-node": "^8.5.4",
     "typescript": "~3.5.3"
   }
