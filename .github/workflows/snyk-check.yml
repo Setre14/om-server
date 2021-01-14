@@ -5,9 +5,9 @@ on:
     branches:
       - '*'
       - '!master'
-
+   
 jobs:
-  security:
+   security:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,7 +15,9 @@ jobs:
         with:
           node-version: '12.x'
       - run: npm install
+      - run: npm run tsc
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/node@master
+        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN}}
