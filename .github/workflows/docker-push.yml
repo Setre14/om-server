@@ -6,6 +6,20 @@ on:
       - master
 
 jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: npm install
+      - run: npm run tsc
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN}}
   test:
     runs-on: ubuntu-latest
     steps:
@@ -16,7 +30,7 @@ jobs:
       - run: npm install
       - run: npm run mocha
   push_to_registry:
-    needs: test
+    needs: [test, security]
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
