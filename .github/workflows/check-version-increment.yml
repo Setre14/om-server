@@ -17,4 +17,4 @@ jobs:
         with:
           ref: 'master'
       - name: Check if version tag exists
-        run: tag=$(git tag -l ${{ steps.package-version.outputs.current-version }}) && test v$tag != v${{ steps.package-version.outputs.current-version }}
+        run: tag=$(git tag -l ${{ steps.package-version.outputs.current-version }}) && echo $tag && test v$tag != v${{ steps.package-version.outputs.current-version }}
