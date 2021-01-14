@@ -1,6 +1,10 @@
 name: Snyk check
 
-on: push
+on: 
+  push:
+    branches:
+      - '*'
+      - '!master'
 
 jobs:
   security:
