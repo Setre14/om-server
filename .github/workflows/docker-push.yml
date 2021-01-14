@@ -54,6 +54,8 @@ jobs:
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
+      - name: Remove tag if exists
+        run: git tag -d ${{ steps.package-version.outputs.current-version }} | true
       - name: Tag snapshot
         uses: tvdias/github-tagger@v0.0.2
         with:
