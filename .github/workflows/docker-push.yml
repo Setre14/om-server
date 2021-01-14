@@ -47,13 +47,13 @@ jobs:
     name: Tag
     runs-on: ubuntu-latest
     steps:
-      - name: get-npm-version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@master
       - name: Checkout branch "master"
         uses: actions/checkout@v2
         with:
           ref: 'master'
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
       - name: Create tag
         uses: actions/github-script@v3
         with:
