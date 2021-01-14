@@ -54,10 +54,11 @@ jobs:
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
-      - name: Remove tag if exists
-        run: git tag -d ${{ steps.package-version.outputs.current-version }} | true
-      - name: Tag snapshot
-        uses: tvdias/github-tagger@v0.0.2
+      - name: Set tag
+        run: git tag -f ${{ steps.package-version.outputs.current-version }}
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.package-version.outputs.current-version }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: true
